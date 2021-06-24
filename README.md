@@ -3,9 +3,13 @@ People use this Source to bind it as a stealer and srmotion is selling it for 15
 
 
 
-#If you are going to make issues on why this doesnt work and it just crashes
-figure it out urself skid.
+If you are going to make issues on why this doesnt work and it just crashes
+figure it out urself 
 
+Most errors can be fixed easily.
 
-#1 thing. Never sell something thats public. because you are going to get exposed in a single Second
-This is a modified version of ama6nen's inzernal
+**DO not make a issue saying it doesnt work. you'll just waste ur time**
+
+# I have Full Permissions to upload it from the Original creator HertZ himself.
+
+i do not claim any rights that ive made this. all rights go to hertz.
