@@ -13,3 +13,6 @@ Most errors can be fixed easily.
 # I have Full Permissions to upload it from the Original creator HertZ himself.
 
 i do not claim any rights that ive made this. all rights go to hertz.
+
+
+# This wont get any updates if it will, it will probably be because somebody is selling another version of this.
