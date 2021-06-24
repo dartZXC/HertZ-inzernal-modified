@@ -1,14 +1,18 @@
------ HertZ Internal Modified
+HertZ Internal Modified
+=======================
 People are using this source to bind the inzernal with a stealer and srmotion is selling it for 15 dls so we decided to release it for everyone as open source 
 If you are going to make issues on why this doesnt work and it just crashes figure it out urself  
 
 Most errors can be fixed easily.
 
------ DO not make a issue saying it doesn't work, you'll just waste ur time
+DO not make a issue saying it doesn't work, you'll just waste ur time
+---------------------------------------------------------------------
 
------ I have Full Permissions to upload it from the Original creator HertZ himself.
+I have Full Permissions to upload it from the Original creator HertZ himself.
+-----------------------------------------------------------------------------
 I have not and do not claim any rights that I have made this internal, all rights go back to the original creator, HertZ.
 
----- Some Information
+Some Information
+----------------
 Make sure to build in debug/release x64!  
 This wont get any updates if it will, it will probably be because somebody is selling another version of this.  
