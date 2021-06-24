@@ -7,15 +7,15 @@ I have not and do not claim any rights that I have made this internal, all right
 
 Some Information
 ----------------
-Make sure to build in debug/release x64!  
+Make sure to build in debug/release x64!
 
 DO not make a issue saying it doesn't work, you'll just waste ur time.
 
-People are using this source to bind the inzernal with a stealer and srmotion is selling it for 15 dls so we decided to release it for everyone as open source 
+People are using this source to bind the inzernal with a stealer/rat and SrMotion is selling it for 15 dls so we decided to release it for everyone as open source.
 
-If you are going to make issues on why this doesnt work and it just crashes figure it out urself  
+If you are going to make issues on why this doesnt work and it just crashes, figure it out urself.
 
-Most errors can be fixed easily.  
+Most errors can be fixed easily.
 
-This wont get any updates if it will, it will probably be because somebody is selling another version of this.  
+This wont get any updates if it will, it will probably be because somebody is selling another version of this.
 
