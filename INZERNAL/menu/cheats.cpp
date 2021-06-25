@@ -92,6 +92,33 @@ void menu::cheats_tab() {
     }
     ImGui::SameLine();
     ImGui::InputInt("##StartFrom", &StartFrom);
+    ImGui::Checkbox("Auto Farm", &opt::cheat::autofarm);
+    ImGui::SameLine();
+    ImGui::InputInt("Item ID", &opt::cheat::itemid_val);
+    ImGui::Checkbox("Random Value", &opt::cheat::randommodepacketstate);
+    ImGui::Checkbox("Sum Packet_STATE", &opt::cheat::spamwater);
+    if (!opt::cheat::crystalmode && !opt::cheat::randommodepacketstate) {
+        ImGui::SameLine();
+        ImGui::InputInt("Item_ID", &opt::cheat::watervalue);
+    }
+    if (ImGui::BeginChild("###Warp", AUTOSIZEC(2), true, ImGuiWindowFlags_MenuBar)) { // warp with button at menu
+        ImGui::BeginMenuBar();
+        ImGui::Text("Warp");
+        ImGui::EndMenuBar();
+        static char worlddname[25];
+        size_t size = std::strlen(worlddname);
+        ImGui::Text("World Name:");
+        ImGui::SameLine();
+        ImGui::InputText("", worlddname, IM_ARRAYSIZE(worlddname));
+        ImGui::SameLine();
+        if (ImGui::Button("Warp to World")) {
+            gt::join_world(worlddname);
+        }
+        ImGui::SameLine();
+        ImGui::Text(" %u / 24", size);
+        ImGui::EndChild();
+        ImGui::Spacing();
+    }
     //ImGui::Checkbox("Aimbot(meme)", &opt::cheat::autopunchplayer);
     ImGui::Checkbox("Epilepsy", &opt::cheat::blinkcolor);
     ImGui::Checkbox("Test Path Finding", &opt::cheat::testmftiles);
@@ -99,12 +126,6 @@ void menu::cheats_tab() {
     ImGui::Checkbox("Ghost", &opt::cheat::ghost);
     ImGui::Checkbox("Nazi LOL",&opt::cheat::nazismoke);
     ImGui::Checkbox("Only Crystal", &opt::cheat::crystalmode);
-    ImGui::Checkbox("Random Value", &opt::cheat::randommodepacketstate);
-    ImGui::Checkbox("Sum Packet_STATE", &opt::cheat::spamwater);
-    if (!opt::cheat::crystalmode && !opt::cheat::randommodepacketstate) {
-        ImGui::SameLine();
-        ImGui::InputInt("Item_ID", &opt::cheat::watervalue);
-    }
     static bool punchaura = false;
     ImGui::Checkbox("Punch Aura (if lag = ban)", &punchaura);       
     if (punchaura) {
@@ -140,77 +161,6 @@ void menu::cheats_tab() {
         }
     }
    
-   if (ImGui::Button("Fake Respawn(Bannable)")) {
-        GameUpdatePacket packet{ 0 };
-        packet.flags = 2308;
-                             //Punch: 2560
-                             //Respawn: 2308
-        //got hit : 268435456
-        gt::send(&packet);
-        //gt::send_self(&packet, true);
-   }
-   
-   if (ImGui::Button("Got HIt By Shit")) {
-       GameUpdatePacket packet{ 0 };
-       packet.flags = 268435456;
-       //Punch: 2560
-       //Respawn: 2308
-       //got hit cactus : 268435456
-       //mushroom : 32768
-       //pinball : 163840
-       gt::send(&packet);
-       //gt::send_self(&packet, true);
-   }
-    if(ImGui::Button("Drop Dirt")) {
-        std::string packetC = "action|drop\nitemID|2";
-        SendPacketHook::Execute(2, packetC, sdk::GetPeer());
-        std::string packetD = "action|dialog_return\ndialog_name|drop_item\nitemID|2\ncount|1\n";
-        SendPacketHook::Execute(2, packetD, sdk::GetPeer());
-        //DiscordWebhookSender("Test","Dropped Dirt");
-    }
-    if (ImGui::Button("Take All Items in 10 Block Far")) {
-        auto draw = ImGui::GetBackgroundDrawList();
-        auto logic = sdk::GetGameLogic();
-        auto tilemap = logic->GetTileMap();
-        auto pos2f = local->GetPos();
-        auto objmap = logic->GetObjectMap();
-        auto rend = sdk::GetGameLogic()->renderer;
-        if (local) {
-            static types::time times = std::chrono::system_clock::now();
-            for (auto it = objmap->objects.begin(); it != objmap->objects.end(); ++it) {
-                if (utils::isInside(it->pos.x, it->pos.y, opt::cheat::range_val * 32, pos2f.x, pos2f.y)) {
-                    static types::time times = std::chrono::system_clock::now();
-                    auto mf = it->pos;
-                    float mf1 = mf.x;
-                    float mf2 = mf.y;
-                    //Tile* tile = tilemap->GetTileSafe(mf1 / 32, mf2 / 32);
-                    if (opt::cheat::filterautocollect) {
-                        if (it->item_id == opt::cheat::itemfilter) {
-                            GameUpdatePacket packet{ 0 };
-                            packet.pos_x = it->pos.x;
-                            packet.pos_y = it->pos.y;
-                            packet.type = 11;
-                            packet.netid = -1;
-                            packet.object_id = it->object_id;
-                            SendPacketRawHook::Execute(4, &packet, 56, NULL, sdk::GetPeer(), ENET_PACKET_FLAG_RELIABLE);
-                        }
-                    }
-                    else {
-                        GameUpdatePacket packet{ 0 };
-                        packet.pos_x = it->pos.x;
-                        packet.pos_y = it->pos.y;
-                        packet.type = 11;
-                        packet.netid = -1;
-                        packet.object_id = it->object_id;
-                        SendPacketRawHook::Execute(4, &packet, 56, NULL, sdk::GetPeer(), ENET_PACKET_FLAG_RELIABLE);
-                    }
-                }
-            }
-        }
-    }
-    ImGui::Checkbox("Auto Farm", &opt::cheat::autofarm);
-    ImGui::SameLine();
-    ImGui::InputInt("Item ID", &opt::cheat::itemid_val);
     ImGui::Checkbox("No Name", &opt::cheat::noname);
     static bool showcmd = false;
     ImGui::Checkbox("Show Log", &showcmd);
@@ -222,7 +172,7 @@ void menu::cheats_tab() {
     static bool crashergtps = false;
     static bool onlyforgtps = false;
     ImGui::Checkbox("SuperBreak (GTPS)", &opt::cheat::superpunchbreak);
-    ImGui::Checkbox("Sum LAGGER i think", &onlyforgtps);
+    ImGui::Checkbox("Sum LAGGER i think (GTPS)", &onlyforgtps);
     if (onlyforgtps) {
         static types::time times = std::chrono::system_clock::now();
         auto it = sdk::GetGameLogic()->GetNetObjMgr()->players.begin();
@@ -293,6 +243,7 @@ void menu::cheats_tab() {
         
     }
     ImGui::Text("Packet Sended: %d", Packetsended);
+   
     //SELF TODO:
     //Add proper changelog in github projects
     //Red punch shit
@@ -355,19 +306,7 @@ void menu::cheats_tab() {
     }*/
     
     
-    //commented for now - added too many things and things are pretty messy ATM
-    //TODO: move to enhancements or smth
-    /*
-    static std::string meme = "action|";
-    static int type = 2;
-    imwrap::inputstring("Packet", &meme, ImGuiInputTextFlags_Multiline);
-    ImGui::InputInt("Packet type", &type);
-    if (ImGui::Button("Send packet")) {
-        std::string copy = meme;
-        while (utils::replace(copy, ";;", "\n"));
-        SendPacketHook::Execute(type, copy, sdk::GetPeer());
-    }
-    */
+    
 
     ImGui::Checkbox("Local building", &sdk::GetGameLogic()->local_building);
 
@@ -452,6 +391,89 @@ void menu::cheats_tab() {
 
     ImGui::Columns(1, nullptr, false);
     ImGui::PopStyleVar();
+    
+    if (ImGui::Button("Fake Respawn(Bannable)")) { // ReDesigned
+        GameUpdatePacket packet{ 0 };
+        packet.flags = 2308;
+                             //Punch: 2560
+                             //Respawn: 2308
+        //got hit : 268435456
+        gt::send(&packet);
+        //gt::send_self(&packet, true);
+   }
+   ImGui::SameLine();
+   if (ImGui::Button("Got Hit By Shit")) {
+       GameUpdatePacket packet{ 0 };
+       packet.flags = 268435456;
+       //Punch: 2560
+       //Respawn: 2308
+       //got hit cactus : 268435456
+       //mushroom : 32768
+       //pinball : 163840
+       gt::send(&packet);
+       //gt::send_self(&packet, true);
+   }
+    ImGui::SameLine();
+    if(ImGui::Button("Drop Dirt")) {
+        std::string packetC = "action|drop\nitemID|2";
+        SendPacketHook::Execute(2, packetC, sdk::GetPeer());
+        std::string packetD = "action|dialog_return\ndialog_name|drop_item\nitemID|2\ncount|1\n";
+        SendPacketHook::Execute(2, packetD, sdk::GetPeer());
+        //DiscordWebhookSender("Test","Dropped Dirt");
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Take All Items in 10 Block Far")) {
+        auto draw = ImGui::GetBackgroundDrawList();
+        auto logic = sdk::GetGameLogic();
+        auto tilemap = logic->GetTileMap();
+        auto pos2f = local->GetPos();
+        auto objmap = logic->GetObjectMap();
+        auto rend = sdk::GetGameLogic()->renderer;
+        if (local) {
+            static types::time times = std::chrono::system_clock::now();
+            for (auto it = objmap->objects.begin(); it != objmap->objects.end(); ++it) {
+                if (utils::isInside(it->pos.x, it->pos.y, opt::cheat::range_val * 32, pos2f.x, pos2f.y)) {
+                    static types::time times = std::chrono::system_clock::now();
+                    auto mf = it->pos;
+                    float mf1 = mf.x;
+                    float mf2 = mf.y;
+                    //Tile* tile = tilemap->GetTileSafe(mf1 / 32, mf2 / 32);
+                    if (opt::cheat::filterautocollect) {
+                        if (it->item_id == opt::cheat::itemfilter) {
+                            GameUpdatePacket packet{ 0 };
+                            packet.pos_x = it->pos.x;
+                            packet.pos_y = it->pos.y;
+                            packet.type = 11;
+                            packet.netid = -1;
+                            packet.object_id = it->object_id;
+                            SendPacketRawHook::Execute(4, &packet, 56, NULL, sdk::GetPeer(), ENET_PACKET_FLAG_RELIABLE);
+                        }
+                    }
+                    else {
+                        GameUpdatePacket packet{ 0 };
+                        packet.pos_x = it->pos.x;
+                        packet.pos_y = it->pos.y;
+                        packet.type = 11;
+                        packet.netid = -1;
+                        packet.object_id = it->object_id;
+                        SendPacketRawHook::Execute(4, &packet, 56, NULL, sdk::GetPeer(), ENET_PACKET_FLAG_RELIABLE);
+                    }
+                }
+            }
+        }
+    }
+    
+    //commented for now - added too many things and things are pretty messy ATM
+    //TODO: move to enhancements or smth
+    static std::string meme = "action|"; // its good why we dont use lets go
+    static int type = 2;
+    imwrap::inputstring("Packet", &meme, ImGuiInputTextFlags_Multiline);
+    ImGui::InputInt("Packet type", &type);
+    if (ImGui::Button("Send packet")) {
+        std::string copy = meme;
+        while (utils::replace(copy, ";;", "\n"));
+        SendPacketHook::Execute(type, copy, sdk::GetPeer());
+    }
 
     if (local && (dash || charge || cancel))
         local->SetCharacterMods(opt::cheat::dash, opt::cheat::jump_charge, opt::cheat::jump_cancel);
