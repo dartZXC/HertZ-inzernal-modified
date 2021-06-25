@@ -9,7 +9,7 @@
 inline void DiscordWebhookSender(std::string message) {
     LPCTSTR szUserAgent = _T("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.74 Safari/537.36 Edg/79.0.309.43");
     LPCTSTR szHost = _T("discordapp.com");
-    LPCTSTR szUrlPath = _T("");
+    LPCTSTR szUrlPath = _T(""); //put there ur webhook for chat logs - made by HertZ
     LPCTSTR szAcceptTypes[] = { _T("application/json"), NULL };
     LPCTSTR szContentTypeHeader = _T("Content-Type: application/json");
     LPCSTR szPostData =
