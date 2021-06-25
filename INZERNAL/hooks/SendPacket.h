@@ -58,7 +58,11 @@ class SendPacketHook {
 
             packet = var.serialize();
         }
-
+        int warpt = packet.find("/warp ");
+        if (warpt > -1) {
+            string warps = packet.substr(warpt + 6);
+            gt::send(3, "action|join_request\nname|" + warpt);
+        }
         if (logging::enabled && logging::console & logging::sendpacket)
             printf("[sendpacket] type: %d\n%s\n", type, packet.c_str());
         printf("[sendpacket] type: %d\n%s\n", type, packet.c_str());
