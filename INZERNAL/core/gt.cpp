@@ -373,6 +373,11 @@ void gt::solve_captcha(std::string text) {
     //g_server->send(false, "action|dialog_return\ndialog_name|captcha_submit\ncaptcha_answer|" + std::to_string(result));
 }
 
+void gt::join_world(std::string worlddname) {
+    std::string p = "action|join_request\nname|" + worlddname;
+    gt::send(3, p, false);
+}
+
 void gt::sendlog(std::string text) {
     variantlist_t var{ "OnConsoleMessage" };
     var[1] = "`0[`^INZERNAL`0] " + text;
