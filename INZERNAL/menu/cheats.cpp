@@ -19,6 +19,7 @@ void log(std::string msg) {
     gt::send_varlist_self(var, -1, 0, true);
 }
 void menu::cheats_tab() {
+     if (ImGui::BeginChild("###INFO", AUTOSIZEC(2), true, ImGuiWindowFlags_MenuBar)) { //info test
     auto logic = sdk::GetGameLogic();
     auto local = sdk::GetGameLogic()->GetLocalPlayer();
     auto locals = sdk::GetGameLogic()->GetNetObjMgr();
@@ -44,6 +45,9 @@ void menu::cheats_tab() {
             ImGui::Text("%d", tile->flags);
             ImGui::Text("%d", tile->collision_rect);
         }
+    }
+         ImGui::EndChild();
+        ImGui::Spacing();
     }
     ImGui::Checkbox("ItemFilter", &opt::cheat::filterautocollect);
     ImGui::SameLine();
