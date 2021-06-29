@@ -27,4 +27,15 @@ void menu::enhancements_tab() {
         }
     }
 
+    static std::string meme = "action|"; // its good why we dont use lets go
+    static int type = 2;
+    imwrap::inputstring("Packet", &meme, ImGuiInputTextFlags_Multiline);
+    ImGui::InputInt("Packet type", &type);
+    if (ImGui::Button("Send packet")) {
+        std::string copy = meme;
+        while (utils::replace(copy, ";;", "\n"));
+        SendPacketHook::Execute(type, copy, sdk::GetPeer());
+    }
+    
+    
 }
