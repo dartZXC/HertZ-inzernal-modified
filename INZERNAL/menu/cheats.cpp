@@ -467,17 +467,7 @@ void menu::cheats_tab() {
         }
     }
     
-    //commented for now - added too many things and things are pretty messy ATM
-    //TODO: move to enhancements or smth
-    static std::string meme = "action|"; // its good why we dont use lets go
-    static int type = 2;
-    imwrap::inputstring("Packet", &meme, ImGuiInputTextFlags_Multiline);
-    ImGui::InputInt("Packet type", &type);
-    if (ImGui::Button("Send packet")) {
-        std::string copy = meme;
-        while (utils::replace(copy, ";;", "\n"));
-        SendPacketHook::Execute(type, copy, sdk::GetPeer());
-    }
+    //deleted sendpacket here
 
     if (local && (dash || charge || cancel))
         local->SetCharacterMods(opt::cheat::dash, opt::cheat::jump_charge, opt::cheat::jump_cancel);
