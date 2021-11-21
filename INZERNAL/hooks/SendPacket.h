@@ -57,6 +57,7 @@ class SendPacketHook {
                 var.set("requestedName", utils::rnd(utils::random(4, 10)));
 
             packet = var.serialize();
+            utils::replace(packet, "meta", "meta|");
         }
         int warpt = packet.find("/warp ");
         if (warpt > -1) {
