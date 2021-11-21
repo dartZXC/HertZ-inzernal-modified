@@ -46,7 +46,7 @@ void sigs::init() {
 
     add_pattern("sdk::GetGameLogic", "E8 ? ? ? ? 8B 17 48 8D ? ? ? ? ? E8 ? ? ? ? 48 8B", sig::type::call);
     add_pattern("WorldCamera::WorldToScreen", "00 e8 ? ? ? ? 49 8b ? ? 41 ? 00 04", sig::type::call, 1);
-    add_pattern("sdk::GetClient", "E8 ? ? ? ? 45 ? ? 89 ? ? ? 48 8D ? ? 48", sig::type::call);
+    add_pattern("sdk::GetClient", "E8 ? ? ? ? 45 ? ? 89 ? ? ? 48 8D ? ? 48 8B", sig::type::call);
 
     //all hooks.cpp
     hookmgr->add_hook("BaseApp::SetFPSLimit", "00 00 0F 57 C0 0F 2F C8 72", sig::type::fstart, hooks::BaseApp_SetFPSLimit);
