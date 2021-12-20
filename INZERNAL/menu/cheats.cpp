@@ -504,10 +504,10 @@ void menu::cheats_tab() {
     }
     if (imwrap::fchanger("Gravity changer", opt::cheat::gravity_val, opt::cheat::gravity_on, -500.f, 2000.f) && local)
         local->gravity.set(global::state.gravity);
-
+    }
     static bool isConstOn = false;
 
-    
+    if (ImGui::CollapsingHeader("Game Constants")) {
     if (ImGui::BeginChild("###Constants", isConstOn ? AUTOSIZEC(6) : AUTOSIZEC(2), true, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar)) {
         ImGui::BeginMenuBar();
         ImGui::Text("Game constants");
