@@ -101,6 +101,7 @@ void menu::cheats_tab() {
         ImGui::SameLine();
         ImGui::InputInt("Item_ID", &opt::cheat::watervalue);
     }
+    if (ImGui::CollapsingHeader("Warp")) {
     if (ImGui::BeginChild("###Warp", AUTOSIZEC(2), true, ImGuiWindowFlags_MenuBar)) { // warp with button at menu
         ImGui::BeginMenuBar();
         ImGui::Text("Warp");
@@ -118,6 +119,7 @@ void menu::cheats_tab() {
         ImGui::Text(" %u / 24", size);
         ImGui::EndChild();
         ImGui::Spacing();
+    }
     }
     //ImGui::Checkbox("Aimbot(meme)", &opt::cheat::autopunchplayer);
     ImGui::Checkbox("Epilepsy", &opt::cheat::blinkcolor);
@@ -305,10 +307,6 @@ void menu::cheats_tab() {
         gt::send(&packet);
     }*/
     
-    
-    
-
-    ImGui::Checkbox("Local building", &sdk::GetGameLogic()->local_building);
 
     
     //commented for now - added too many things and things are pretty messy ATM
@@ -361,37 +359,6 @@ void menu::cheats_tab() {
     //    ImGui::Image(ImTextureID(texture.m_ptr), size, ImVec2((size.x + size.x) / texture.m_width, 1 - (size.x / texture.m_width)),
     //        ImVec2(1 - ((size.y + size.y) / texture.m_height), size.y / texture.m_height));
     //}
-
-    imwrap::prep_columns(6);
-    imwrap::checkbox("TP on click", opt::cheat::tp_click, "Teleports to cursor position when you press ctrl + left click");
-    bool dash = imwrap::checkbox("Dashing", opt::cheat::dash, "Allows you to double tap to dash in any direction");
-
-    ImGui::NextColumn();
-    imwrap::checkbox("Block SPR", opt::cheat::block_sendpacketraw, "Sendpacketraw. Basically full-on ghost, but a bit more crude than actual ghost.");
-    bool charge = imwrap::checkbox("Jump charge", opt::cheat::jump_charge, "Switches your jumping mode to being charging, holding means higher jump");
-
-    ImGui::NextColumn();
-    imwrap::checkbox("Mod zoom", opt::cheat::mod_zoom, "Allows you to zoom as far out as you want to, like mods");
-    bool cancel = imwrap::checkbox("Jump cancel", opt::cheat::jump_cancel, "You can tap W in air to instantly change your ascent to starting descent");
-
-    ImGui::NextColumn();
-    imwrap::checkbox("Dev zoom", opt::cheat::dev_zoom, "Same as mod zoom but allows you to place and build far away too.\nWhich can ban btw.");
-    imwrap::checkbox("Free dialogs", opt::cheat::dialog_cheat,
-        "When enabled, you can move, punch and so on while a dialog is opened.\nIf there is text in the dialog, then you cant move, but can still punch, etc.");
-
-    ImGui::NextColumn();
-    imwrap::checkbox("Antighost", opt::cheat::antighost,
-        "Ignores ghost slimed effect.\nAlso now completely ignores any packets relating to these annoying fuckers.\nWell, that makes see ghosts useless with this, I "
-        "guess?");
-    imwrap::checkbox("Antipunch", opt::cheat::antipunch, "Simple: Same as having a punch jammer in worlds that don't have one.");
-
-    ImGui::NextColumn();
-    imwrap::checkbox("See ghosts", opt::cheat::see_ghosts, "Allows you to see ghosts as the name says\nDoesn't work with antighost.");
-    imwrap::checkbox("See fruits", opt::cheat::see_fruits, "See how many fruits a tree will have before it has grown fully.");
-
-    ImGui::Columns(1, nullptr, false);
-    ImGui::PopStyleVar();
-    
     if (ImGui::Button("Fake Respawn(Bannable)")) { // ReDesigned
         GameUpdatePacket packet{ 0 };
         packet.flags = 2308;
@@ -462,18 +429,54 @@ void menu::cheats_tab() {
             }
         }
     }
+    if (ImGui::CollapsingHeader("INZERNAL CHEATS")) {
+        if (ImGui::BeginChild("###inzernalch", AUTOSIZE(2.f), true)) {
+    ImGui::Checkbox("Local building", &sdk::GetGameLogic()->local_building);
+    
+    imwrap::prep_columns(6);
+    imwrap::checkbox("TP on click", opt::cheat::tp_click, "Teleports to cursor position when you press ctrl + left click");
+    bool dash = imwrap::checkbox("Dashing", opt::cheat::dash, "Allows you to double tap to dash in any direction");
+
+    ImGui::NextColumn();
+    imwrap::checkbox("Block SPR", opt::cheat::block_sendpacketraw, "Sendpacketraw. Basically full-on ghost, but a bit more crude than actual ghost.");
+    bool charge = imwrap::checkbox("Jump charge", opt::cheat::jump_charge, "Switches your jumping mode to being charging, holding means higher jump");
+
+    ImGui::NextColumn();
+    imwrap::checkbox("Mod zoom", opt::cheat::mod_zoom, "Allows you to zoom as far out as you want to, like mods");
+    bool cancel = imwrap::checkbox("Jump cancel", opt::cheat::jump_cancel, "You can tap W in air to instantly change your ascent to starting descent");
+
+    ImGui::NextColumn();
+    imwrap::checkbox("Dev zoom", opt::cheat::dev_zoom, "Same as mod zoom but allows you to place and build far away too.\nWhich can ban btw.");
+    imwrap::checkbox("Free dialogs", opt::cheat::dialog_cheat,
+        "When enabled, you can move, punch and so on while a dialog is opened.\nIf there is text in the dialog, then you cant move, but can still punch, etc.");
+
+    ImGui::NextColumn();
+    imwrap::checkbox("Antighost", opt::cheat::antighost,
+        "Ignores ghost slimed effect.\nAlso now completely ignores any packets relating to these annoying fuckers.\nWell, that makes see ghosts useless with this, I "
+        "guess?");
+    imwrap::checkbox("Antipunch", opt::cheat::antipunch, "Simple: Same as having a punch jammer in worlds that don't have one.");
+
+    ImGui::NextColumn();
+    imwrap::checkbox("See ghosts", opt::cheat::see_ghosts, "Allows you to see ghosts as the name says\nDoesn't work with antighost.");
+    imwrap::checkbox("See fruits", opt::cheat::see_fruits, "See how many fruits a tree will have before it has grown fully.");
+
+    ImGui::Columns(1, nullptr, false);
+    ImGui::PopStyleVar();
+        }
+    }
+    
     
     //commented for now - added too many things and things are pretty messy ATM
     //TODO: move to enhancements or smth
-    static std::string meme = "action|"; // its good why we dont use lets go
-    static int type = 2;
-    imwrap::inputstring("Packet", &meme, ImGuiInputTextFlags_Multiline);
-    ImGui::InputInt("Packet type", &type);
-    if (ImGui::Button("Send packet")) {
-        std::string copy = meme;
-        while (utils::replace(copy, ";;", "\n"));
-        SendPacketHook::Execute(type, copy, sdk::GetPeer());
-    }
+    //static std::string meme = "action|"; // its good why we dont use lets go
+    //static int type = 2;
+    //imwrap::inputstring("Packet", &meme, ImGuiInputTextFlags_Multiline);
+    //ImGui::InputInt("Packet type", &type);
+    //if (ImGui::Button("Send packet")) {
+    //    std::string copy = meme;
+    //    while (utils::replace(copy, ";;", "\n"));
+    //    SendPacketHook::Execute(type, copy, sdk::GetPeer());
+    //}
 
     if (local && (dash || charge || cancel))
         local->SetCharacterMods(opt::cheat::dash, opt::cheat::jump_charge, opt::cheat::jump_cancel);
@@ -481,6 +484,7 @@ void menu::cheats_tab() {
     imwrap::prep_columns(2);
     ImGui::Spacing();
     static int ix = C_PUNCH_RELOAD_TIME;
+    if (ImGui::CollapsingHeader("Cooldown Changer")) {
     if (ImGui::BeginChild("###cooldownchanger", AUTOSIZEC(2), true, ImGuiWindowFlags_MenuBar)) {
         ImGui::BeginMenuBar();
         ImGui::Text("Punch speed changer");
@@ -500,9 +504,10 @@ void menu::cheats_tab() {
     }
     if (imwrap::fchanger("Gravity changer", opt::cheat::gravity_val, opt::cheat::gravity_on, -500.f, 2000.f) && local)
         local->gravity.set(global::state.gravity);
-
+    }
     static bool isConstOn = false;
 
+    if (ImGui::CollapsingHeader("Game Constants")) {
     if (ImGui::BeginChild("###Constants", isConstOn ? AUTOSIZEC(6) : AUTOSIZEC(2), true, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_MenuBar)) {
         ImGui::BeginMenuBar();
         ImGui::Text("Game constants");
@@ -525,6 +530,7 @@ void menu::cheats_tab() {
                 if (opt::cheat::punch_cooldown_on) //dont reset this if we have the other option on for this
                     consts::set_float(C_PUNCH_RELOAD_TIME, opt::cheat::punch_cooldown_val);
             }
+            
             ImGui::Spacing();
             ImGui::Spacing();
 
@@ -566,6 +572,8 @@ void menu::cheats_tab() {
 
     ImGui::Columns(1, nullptr, false);
     ImGui::PopStyleVar();
+    }
+        
     //dont worry bringing back instant stop and start later on without the hooks.
     
 }
