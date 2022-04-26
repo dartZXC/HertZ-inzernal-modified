@@ -1265,7 +1265,7 @@ void menu::TouchdrawBox() {
         }
         loopRainbow();
         auto draw = ImGui::GetBackgroundDrawList();
-        std::string hah = "Slash#1337 on discord if you need any help";
+        std::string hah = "purpl3r0se#0001 on discord if you need any help";
         const char* hahx = hah.c_str();
         draw->AddText(NULL, 18.0f, ImVec2(5, 5), ESPColor, hahx);
         ImGui::EndFrame();
