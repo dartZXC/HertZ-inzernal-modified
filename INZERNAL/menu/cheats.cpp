@@ -478,7 +478,7 @@ void menu::cheats_tab() {
     //    SendPacketHook::Execute(type, copy, sdk::GetPeer());
     //}
 
-    if (local && (opt::cheat::dash || opt::cheat::charge || opt::cheat::cancel))
+    if (local && (opt::cheat::dash || opt::cheat::jumo_charge || opt::cheat::jumo_cancel))
         local->SetCharacterMods(opt::cheat::dash, opt::cheat::jump_charge, opt::cheat::jump_cancel);
 
     imwrap::prep_columns(2);
