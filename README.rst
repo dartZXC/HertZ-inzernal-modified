@@ -1,21 +1,16 @@
-HertZ Internal Modified
-=======================
+Hertz Internal Modified - Dart
 
-I have full permission to upload this from the original creator, HertZ himself.
------------------------------------------------------------------------------
-I have not and do not claim any rights that I have made this internal, all rights go back to the original creator, HertZ.
+#Discord Server 
+https://discord.gg/GwqGANVbKG
+=============================
 
-Some Information
-----------------
-Make sure to build in debug/release x64!
+This internal is made by HertZxD  Rights owned by him
 
-DO not make a issue saying it doesn't work, you'll just waste ur time.
+#NOTE TO SKIDS
 
-Dont sell this.
+if ur gonna sell this, watch me leak your internal for free lmao
 
-If you are going to make issues on why this doesnt work and it just crashes, figure it out urself.
-
-Most errors can be fixed easily.
-
-This wont get any updates if it will, it will probably be because somebody is selling another version of this.
-
+Multibot added soon for a modified version with hosting and autofarming and scripting https://discord.gg/GwqGANVbKG (FREE)
+ 
+ 
+ For help join the disc server
