@@ -1,12 +1,12 @@
 Hertz Internal Modified - Dart
 
-#Discord Server 
+# Discord Server 
 https://discord.gg/GwqGANVbKG
 =============================
 
 This internal is made by HertZxD  Rights owned by him
 
-#NOTE TO SKIDS
+# NOTE TO SKIDS
 
 if ur gonna sell this, watch me leak your internal for free lmao
 
