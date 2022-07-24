@@ -52,6 +52,7 @@
     <ClCompile Include="menu\imwrap.cpp" />
     <ClCompile Include="menu\enhancements.cpp" />
     <ClCompile Include="menu\menu.cpp" />
+    <ClCompile Include="menu\Multibot.cpp" />
     <ClCompile Include="menu\PlayerPog.cpp" />
     <ClCompile Include="PathFinder\AStar.cpp" />
     <ClCompile Include="proton\clanlib\angle.cpp" />
