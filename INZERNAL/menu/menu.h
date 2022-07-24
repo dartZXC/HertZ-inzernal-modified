@@ -18,6 +18,7 @@ namespace menu {
     void cheats_tab();
     void framework_tab();
     void playerpog();
+    void multibottab();
     void autofarmmenu();
     void animate();
     void EndScene(IDirect3DDevice9* device, bool active);

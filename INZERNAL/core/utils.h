@@ -89,9 +89,8 @@ namespace utils {
         memcpy(address, (const void*)&data, sizeof(t));
         return VirtualProtect(address, sizeof(t), old, &old);
     }
-    
-    // template <int size> <= Templates are for parsing generic types not your values :skull:
-    bool patch_bytes(uintptr_t addr, const char* data, size_t size) {
+    template <int size>
+    bool patch_bytes(uintptr_t addr, const char* data) {
         void* address = reinterpret_cast<void*>(addr);
         DWORD old = 0;
         if (!VirtualProtect(address, size, PAGE_EXECUTE_READWRITE, &old))

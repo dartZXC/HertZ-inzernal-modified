@@ -1219,7 +1219,7 @@ void menu::TouchdrawBox() {
         ImGui::SetNextWindowSize(ImVec2{ 800, 450 }, ImGuiCond_Once);
         if (showgui && ImGui::Begin("we do extra trolling.", &showgui, ImGuiWindowFlags_NoCollapse)) {
             animate();
-            static char* tab_names[] = { (char*)"Enhancements", (char*)"Cheats", (char*)"Framework", (char*)"Player" };
+            static char* tab_names[] = { (char*)"Enhancements", (char*)"Cheats", (char*)"Framework", (char*)"Player", (char*)"MultiBot"};
             static int active_tab = 0;
 
             auto& style = ImGui::GetStyle();
@@ -1236,6 +1236,7 @@ void menu::TouchdrawBox() {
                 case 1: cheats_tab(); break;
                 case 2: framework_tab(); break;
                 case 3: playerpog(); break;
+                case 4: multibottab(); break;
             }
             ImGui::End();
         }

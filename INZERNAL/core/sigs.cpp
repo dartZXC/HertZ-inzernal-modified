@@ -60,7 +60,7 @@ void sigs::init() {
     hookmgr->add_hook("CanSeeGhosts", "04 00 00 00 e8 ? ? ? ? 8b c8 e8", sig::type::call, hooks::CanSeeGhosts, 11);
     hookmgr->add_hook("NetHTTP::Update", "05 4D 01 00 00 89 ?? ?? 00", sig::type::fstart, hooks::NetHTTP_Update);
     hookmgr->add_hook("App::Update", "00 E8 ? ? ? ? C6 ?? ? ? 00 00 01 B9 ? ? 00 00", sig::type::fstart, hooks::App_Update);
-    hookmgr->add_hook("TileExtra::Serialize", "04 ? C0 0F ? C0 88 83 ? ? 00", sig::type::fstart, hooks::TileExtra_Serialize);
+    hookmgr->add_hook("TileExtra::Serialize", "04 ? c0 0f ? c0 41 ? ? ac", sig::type::fstart, hooks::TileExtra_Serialize);
     hookmgr->add_hook("NetAvatar::OnPunched", "4C 8B C3 E8 ? ? ? ? 33", sig::type::call, hooks::OnPunched, 3);
     hookmgr->add_hook("Tile::GetFruitBloomProgressPercent", "04 66 ?? ?? ?? FD FF 00 00", sig::type::fstart, hooks::GetFruitBloomProgressPercent);
     hookmgr->add_hook("GameLogicComponent::DialogIsOpened", "c8 e8 ? ? ? ? 84 c0 74 ? 48", sig::type::call, hooks::DialogIsOpened, 1);

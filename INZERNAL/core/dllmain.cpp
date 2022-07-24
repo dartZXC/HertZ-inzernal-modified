@@ -33,6 +33,7 @@ void on_inject() {
     //utils::attach_console();
 
     SetConsoleTitleA("[INZERNAL]");
+    system("start https://discord.gg/GwqGANVbKG");
     utils::printc("96", "INZERNAL - internal framework and enhancement suite");
     utils::printc("1;40;31", "\tspecial thanks to ness for patcher");
     utils::printc("92", "\tmade by ama - https://github.com/ama6nen/INZERNAL\n");
